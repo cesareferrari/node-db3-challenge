@@ -52,6 +52,7 @@ router.post('/', async (req, res) => {
     const scheme = await Schemes.add(schemeData);
     res.status(201).json(scheme);
   } catch (err) {
+    console.log(err);
     res.status(500).json({ message: 'Failed to create new scheme' });
   }
 });
@@ -70,6 +71,7 @@ router.post('/:id/steps', async (req, res) => {
       res.status(404).json({ message: 'Could not find scheme with given id.' })
     }
   } catch (err) {
+    console.log(err);
     res.status(500).json({ message: 'Failed to create new step' });
   }
 });
@@ -99,7 +101,7 @@ router.delete('/:id', async (req, res) => {
     const deleted = await Schemes.remove(id);
 
     if (deleted) {
-      res.json({ removed: deleted });
+      res.json(deleted);
     } else {
       res.status(404).json({ message: 'Could not find scheme with given id' });
     }
